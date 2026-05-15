@@ -176,7 +176,7 @@ tr:hover td{background:rgba(201,168,76,0.04);}
     <h2>⚙️ One-Time Setup Required</h2>
     <p>To enable result saving, you need to paste your <strong>Google Apps Script Web App URL</strong> into this file.</p>
     <p>Open this HTML file in a text editor, find the line near the top of the &lt;script&gt; section that says:</p>
-    <p><code>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEROQxLiDt3aqElrvjiHrF_45TurSldyqloj3-XYRZxboso3YXdVxUhTCaRlJVekn1/exec";</code></p>
+    <p><code>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUciCPm3pnVh5MAOzAA3wCi7nHMwlV1SMR5CVpoaZBjXUwatcX6yyeXKKcUmvMqYL5/exec";</code></p>
     <p>Replace <code>YOUR_GOOGLE_SCRIPT_URL_HERE</code> with your actual deployed script URL. Follow the setup guide provided separately.</p>
     <p>Once done, the quiz will work fully — results will save to your Google Sheet automatically.</p>
     <button class="btn" onclick="dismissNotice()">I'll set it up — Continue for now</button>
@@ -217,6 +217,14 @@ tr:hover td{background:rgba(201,168,76,0.04);}
     <div class="field-group">
       <label>Department</label>
       <input type="text" id="reg-dept" placeholder="e.g. Operations, Signalling, P-Way" maxlength="80"/>
+    </div>
+    <div class="field-group">
+      <label>Mobile Number</label>
+      <input type="tel" id="reg-mobile" placeholder="e.g. 9876543210" maxlength="15"/>
+    </div>
+    <div class="field-group">
+      <label>Email Address</label>
+      <input type="email" id="reg-email" placeholder="e.g. rahul@dmrc.in" maxlength="100"/>
     </div>
     <div class="field-group">
       <label>Metro Railway</label>
@@ -382,7 +390,7 @@ tr:hover td{background:rgba(201,168,76,0.04);}
 // ============================================================
 // 🔧 CONFIGURATION — PASTE YOUR SCRIPT URL BELOW
 // ============================================================
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEROQxLiDt3aqElrvjiHrF_45TurSldyqloj3-XYRZxboso3YXdVxUhTCaRlJVekn1/exec"; // ← paste your URL here
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUciCPm3pnVh5MAOzAA3wCi7nHMwlV1SMR5CVpoaZBjXUwatcX6yyeXKKcUmvMqYL5/exec"; // ← paste your URL here
 const ADMIN_PASSWORD = "vipul@admin";
 // ============================================================
 
@@ -460,7 +468,7 @@ const ALL_QUESTIONS=[
 // ---- State ----
 let selectedMode='full', activeQuestions=[], userAnswers={};
 let timerInterval, timeLeft=180*60, examSubmitted=false, practiceMode=false;
-let startTime, userName='', userPost='', userDept='', userMetro='';
+let startTime, userName='', userPost='', userDept='', userMetro='', userMobile='', userEmail='';
 let allAdminData=[];
 
 function dismissNotice(){
@@ -498,6 +506,8 @@ function startExam(){
   userPost=document.getElementById('reg-post').value.trim()||'—';
   userDept=document.getElementById('reg-dept').value.trim()||'—';
   userMetro=document.getElementById('reg-metro').value||'—';
+  userMobile=document.getElementById('reg-mobile').value.trim()||'—';
+  userEmail=document.getElementById('reg-email').value.trim()||'—';
 
   if(selectedMode==='hard'){activeQuestions=ALL_QUESTIONS.filter(q=>q.d==='hard');timeLeft=90*60;practiceMode=false;}
   else if(selectedMode==='medium'){activeQuestions=ALL_QUESTIONS.filter(q=>q.d==='medium');timeLeft=60*60;practiceMode=false;}
@@ -676,7 +686,7 @@ function saveResult(correct,wrong,skipped,pct,total,timeTaken){
   const modeLabel={full:'Full Exam',practice:'Practice',hard:'Hard Only',medium:'Medium Only'}[selectedMode];
   const grade=pct>=90?'A+':pct>=75?'A':pct>=60?'B':pct>=45?'C':'F';
   const payload={
-    name:userName,post:userPost,dept:userDept,metro:userMetro,
+    name:userName,post:userPost,dept:userDept,metro:userMetro,mobile:userMobile,email:userEmail,
     mode:modeLabel,score:correct+'/'+total,percentage:pct,
     correct,wrong,skipped,grade,timeTaken,
     submittedAt:new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})
