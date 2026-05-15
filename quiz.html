@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRGR 2020 – MCQ Bank | Vipul Kumar Arya</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&family=Courier+Prime:wght@400;700&display=swap');
+:root{--navy:#0a1628;--gold:#c9a84c;--gold-light:#e8c97a;--cream:#f5f0e8;--red:#c0392b;--green:#1a7a4a;--mid:#1e2d4a;--border:#2a3f5f;--muted:#6b7a99;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--navy);color:var(--cream);min-height:100vh;overflow-x:hidden;}
+.page{position:relative;z-index:1;}
+
+/* ===== REGISTRATION ===== */
+#registration{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;background:radial-gradient(ellipse at 30% 20%,#1e3a5f 0%,var(--navy) 60%);text-align:center;}
+.emblem{width:96px;height:96px;border:3px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin-bottom:22px;box-shadow:0 0 40px rgba(201,168,76,0.35);animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(201,168,76,0.3);}50%{box-shadow:0 0 55px rgba(201,168,76,0.65);}}
+.ministry-tag{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:0.8;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,40px);font-weight:900;line-height:1.1;color:var(--cream);margin-bottom:8px;}
+.subtitle{font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+.gold-rule{width:140px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px auto;}
+
+.reg-card{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.04));border:1.5px solid rgba(201,168,76,0.4);border-radius:14px;padding:32px 36px;max-width:500px;width:100%;margin:0 auto 24px;position:relative;overflow:hidden;}
+.reg-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));}
+.reg-card h2{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin-bottom:6px;}
+.reg-card p{font-size:12px;color:var(--muted);margin-bottom:22px;line-height:1.6;}
+.field-group{margin-bottom:16px;text-align:left;}
+.field-group label{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;font-family:'Courier Prime',monospace;}
+.field-group input,.field-group select{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(201,168,76,0.25);border-radius:6px;padding:11px 14px;color:var(--cream);font-size:14px;font-family:'Source Sans 3',sans-serif;outline:none;transition:border-color 0.2s;}
+.field-group input:focus,.field-group select:focus{border-color:var(--gold);}
+.field-group select option{background:#1e2d4a;color:var(--cream);}
+.error-msg{color:#e74c3c;font-size:12px;margin-top:6px;display:none;}
+.btn-start{background:linear-gradient(135deg,var(--gold),#a07830);color:var(--navy);border:none;cursor:pointer;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;padding:14px 52px;border-radius:4px;letter-spacing:1px;box-shadow:0 8px 32px rgba(201,168,76,0.3);transition:all 0.3s;width:100%;margin-top:8px;}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,168,76,0.5);}
+.author-note{font-size:11px;color:var(--muted);font-family:'Courier Prime',monospace;margin-top:16px;}
+.author-note a{color:var(--gold-light);}
+.exam-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:480px;margin:0 auto 20px;width:100%;}
+.meta-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:14px 10px;text-align:center;}
+.meta-num{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);font-weight:700;}
+.meta-label{font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:3px;}
+.mode-select{display:flex;gap:10px;max-width:500px;margin:0 auto 20px;flex-wrap:wrap;justify-content:center;width:100%;}
+.mode-card{flex:1;min-width:110px;background:rgba(255,255,255,0.04);border:2px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.25s;}
+.mode-card:hover,.mode-card.selected{border-color:var(--gold);background:rgba(201,168,76,0.1);}
+.mode-card h4{font-family:'Playfair Display',serif;color:var(--gold);font-size:13px;margin-bottom:4px;}
+.mode-card p{font-size:10px;color:var(--muted);line-height:1.4;}
+.mode-icon{font-size:22px;margin-bottom:6px;}
+
+/* ===== SPLASH / CONFIG notice ===== */
+#config-notice{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+.notice-box{background:#1e2d4a;border:2px solid var(--gold);border-radius:12px;padding:32px;max-width:520px;width:100%;}
+.notice-box h2{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:12px;font-size:20px;}
+.notice-box p{font-size:13px;color:var(--cream);line-height:1.7;margin-bottom:12px;}
+.notice-box code{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:4px;padding:2px 8px;font-family:'Courier Prime',monospace;font-size:12px;color:var(--gold-light);}
+.notice-box .btn{background:var(--gold);color:var(--navy);border:none;padding:10px 28px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:12px;}
+
+/* ===== EXAM ===== */
+#exam{display:none;min-height:100vh;}
+.exam-header{position:sticky;top:0;z-index:100;background:rgba(10,22,40,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,0.2);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.header-left{display:flex;flex-direction:column;gap:2px;}
+.header-title{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);}
+.header-user{font-size:11px;color:var(--muted);}
+.header-right{display:flex;align-items:center;gap:14px;}
+#timer{font-family:'Courier Prime',monospace;font-size:20px;color:var(--gold);background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);padding:5px 11px;border-radius:4px;min-width:86px;text-align:center;transition:color 0.3s;}
+#timer.danger{color:#e74c3c;border-color:rgba(231,76,60,0.5);animation:blink 1s infinite;}
+@keyframes blink{50%{opacity:0.4;}}
+.progress-bar-wrap{height:3px;background:rgba(255,255,255,0.08);}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width 0.4s ease;}
+.chapter-nav{display:flex;overflow-x:auto;background:var(--mid);border-bottom:1px solid var(--border);padding:0 10px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;}
+.chapter-tab{padding:8px 13px;font-size:10px;font-family:'Courier Prime',monospace;letter-spacing:1px;text-transform:uppercase;cursor:pointer;white-space:nowrap;border:none;background:none;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s;flex-shrink:0;}
+.chapter-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.chapter-tab.done{color:#1a7a4a;}
+.exam-body{max-width:860px;margin:0 auto;padding:32px 18px 100px;}
+.chapter-heading{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+.chapter-heading::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,0.3),transparent);}
+.q-card{background:rgba(30,45,74,0.5);border:1px solid var(--border);border-radius:10px;padding:22px 22px 18px;margin-bottom:18px;transition:border-color 0.3s;}
+.q-card.answered{border-color:rgba(26,122,74,0.45);}
+.q-card.answered-wrong{border-color:rgba(192,57,43,0.35);}
+.q-num{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;}
+.q-badge{font-size:9px;padding:2px 8px;border-radius:20px;letter-spacing:1px;font-family:'Courier Prime',monospace;}
+.q-badge.medium{background:rgba(201,168,76,0.2);color:var(--gold);border:1px solid rgba(201,168,76,0.3);}
+.q-badge.hard{background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);}
+.q-badge.easy{background:rgba(26,122,74,0.2);color:#2ecc71;border:1px solid rgba(46,204,113,0.3);}
+.q-text{font-size:15px;line-height:1.65;color:var(--cream);margin-bottom:16px;}
+.options{display:flex;flex-direction:column;gap:8px;}
+.option{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:6px;cursor:pointer;transition:all 0.2s;font-size:14px;color:var(--cream);line-height:1.5;}
+.option:hover:not(.locked){background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.3);transform:translateX(3px);}
+.option.selected{background:rgba(201,168,76,0.12);border-color:var(--gold);}
+.option.correct{background:rgba(26,122,74,0.2);border-color:#1a7a4a;}
+.option.wrong{background:rgba(192,57,43,0.15);border-color:var(--red);}
+.option.locked{cursor:default;}
+.opt-letter{font-family:'Courier Prime',monospace;font-size:12px;font-weight:700;color:var(--gold);min-width:18px;margin-top:1px;}
+.explanation{margin-top:11px;padding:11px 14px;background:rgba(26,122,74,0.1);border-left:3px solid var(--green);border-radius:0 6px 6px 0;font-size:12px;line-height:1.65;color:#a8d5b5;display:none;}
+.explanation.show{display:block;}
+.explanation strong{color:#2ecc71;}
+.exam-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(10,22,40,0.98);border-top:1px solid rgba(201,168,76,0.2);padding:11px 18px;display:flex;justify-content:space-between;align-items:center;z-index:100;gap:8px;flex-wrap:wrap;}
+.btn{padding:8px 22px;border-radius:4px;font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;border:none;}
+.btn-secondary{background:transparent;color:var(--muted);border:1px solid var(--border);}
+.btn-secondary:hover{color:var(--cream);border-color:var(--cream);}
+.btn-submit{background:linear-gradient(135deg,#1a7a4a,#0d5a34);color:white;padding:10px 30px;font-size:13px;}
+.btn-submit:hover{background:linear-gradient(135deg,#22a060,#1a7a4a);}
+
+/* ===== RESULTS ===== */
+#results{display:none;min-height:100vh;padding:50px 20px;background:radial-gradient(ellipse at 50% 0%,#1e3a5f 0%,var(--navy) 70%);}
+.result-inner{max-width:720px;margin:0 auto;text-align:center;}
+.score-ring{width:170px;height:170px;border-radius:50%;margin:0 auto 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;}
+.score-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.score-ring-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--gold);position:relative;}
+.score-ring-pct{font-size:12px;color:var(--muted);position:relative;}
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0;}
+.result-card{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:16px 10px;text-align:center;}
+.rc-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:4px;}
+.rc-num.green{color:#2ecc71;}.rc-num.red{color:#e74c3c;}.rc-num.gold{color:var(--gold);}.rc-num.blue{color:#5dade2;}
+.rc-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+.grade-box{border:2px solid var(--gold);border-radius:8px;padding:18px;margin:18px 0;background:rgba(201,168,76,0.08);}
+.grade-letter{font-family:'Playfair Display',serif;font-size:50px;color:var(--gold);font-weight:900;}
+.grade-label{font-size:13px;color:var(--muted);margin-top:4px;}
+.saving-indicator{background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.4);border-radius:8px;padding:14px 20px;margin:16px 0;font-size:13px;color:#a8d5b5;display:flex;align-items:center;gap:10px;justify-content:center;}
+.saving-indicator.error{background:rgba(192,57,43,0.15);border-color:rgba(192,57,43,0.4);color:#f1948a;}
+.spinner{width:16px;height:16px;border:2px solid rgba(168,213,181,0.3);border-top-color:#a8d5b5;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.result-author{background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:16px 20px;margin-top:20px;}
+.result-author p{font-size:12px;color:var(--muted);line-height:1.7;}
+.result-author strong{color:var(--gold);}
+.chapter-breakdown{text-align:left;margin-top:28px;}
+.cb-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);margin-bottom:12px;text-align:center;}
+.cb-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;}
+.cb-chap{flex:1.3;color:var(--cream);}
+.cb-bar-wrap{flex:2;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.cb-bar{height:100%;border-radius:3px;}
+.cb-score{min-width:70px;text-align:right;font-family:'Courier Prime',monospace;font-size:11px;}
+.btn-retake{background:linear-gradient(135deg,var(--gold),#a07830);color:var(--navy);border:none;cursor:pointer;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;padding:13px 40px;border-radius:4px;margin-top:24px;letter-spacing:1px;}
+
+/* ===== ADMIN PANEL ===== */
+#admin{display:none;min-height:100vh;padding:0;}
+.admin-header{background:linear-gradient(135deg,#0a1628,#1e2d4a);border-bottom:2px solid var(--gold);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.admin-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);}
+.admin-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+.admin-body{max-width:1100px;margin:0 auto;padding:28px 18px 60px;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.stat-card{background:rgba(30,45,74,0.7);border:1px solid var(--border);border-radius:10px;padding:20px 16px;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);font-weight:700;}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+thead{background:rgba(201,168,76,0.15);}
+th{padding:12px 14px;text-align:left;font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--cream);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(201,168,76,0.04);}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-family:'Courier Prime',monospace;letter-spacing:0.5px;}
+.badge-a{background:rgba(26,122,74,0.25);color:#2ecc71;border:1px solid rgba(46,204,113,0.3);}
+.badge-b{background:rgba(93,173,226,0.2);color:#5dade2;border:1px solid rgba(93,173,226,0.3);}
+.badge-c{background:rgba(201,168,76,0.2);color:var(--gold);border:1px solid rgba(201,168,76,0.3);}
+.badge-f{background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);}
+.admin-loading{text-align:center;padding:60px;color:var(--muted);font-size:14px;}
+.admin-login{max-width:380px;margin:80px auto;background:rgba(30,45,74,0.7);border:1px solid var(--border);border-radius:12px;padding:32px;}
+.admin-login h2{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:6px;}
+.admin-login p{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.admin-empty{text-align:center;padding:60px;color:var(--muted);}
+.admin-empty span{font-size:40px;display:block;margin-bottom:12px;}
+.filter-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center;}
+.filter-bar input,.filter-bar select{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:var(--cream);font-size:12px;outline:none;}
+.filter-bar input:focus,.filter-bar select:focus{border-color:var(--gold);}
+.refresh-btn{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'Courier Prime',monospace;}
+.refresh-btn:hover{background:rgba(201,168,76,0.25);}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:3px;}
+@media(max-width:600px){.result-grid{grid-template-columns:repeat(2,1fr);}.stats-grid{grid-template-columns:repeat(2,1fr);}.exam-body{padding:18px 11px 100px;}.q-text{font-size:13px;}.option{font-size:12px;}.reg-card{padding:22px 18px;}}
+</style>
+</head>
+<body>
+
+<!-- ====== CONFIG NOTICE (shown if SCRIPT_URL not set) ====== -->
+<div id="config-notice" style="display:flex;">
+  <div class="notice-box">
+    <h2>⚙️ One-Time Setup Required</h2>
+    <p>To enable result saving, you need to paste your <strong>Google Apps Script Web App URL</strong> into this file.</p>
+    <p>Open this HTML file in a text editor, find the line near the top of the &lt;script&gt; section that says:</p>
+    <p><code>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec";</code></p>
+    <p>Replace <code>https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec</code> with your actual deployed script URL. Follow the setup guide provided separately.</p>
+    <p>Once done, the quiz will work fully — results will save to your Google Sheet automatically.</p>
+    <button class="btn" onclick="dismissNotice()">I'll set it up — Continue for now</button>
+  </div>
+</div>
+
+<!-- ====== REGISTRATION ====== -->
+<div id="registration" class="page">
+  <div class="emblem">🚇</div>
+  <p class="ministry-tag">Ministry of Housing and Urban Affairs · Government of India</p>
+  <h1>Metro Railways General Rules, 2020</h1>
+  <p class="subtitle">Complete MCQ Bank · All 13 Chapters</p>
+  <div class="gold-rule"></div>
+  <div class="exam-meta">
+    <div class="meta-card"><div class="meta-num">331</div><div class="meta-label">Questions</div></div>
+    <div class="meta-card"><div class="meta-num">13</div><div class="meta-label">Chapters</div></div>
+    <div class="meta-card"><div class="meta-num">Free</div><div class="meta-label">Exam</div></div>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Select exam mode:</p>
+  <div class="mode-select">
+    <div class="mode-card selected" id="mode-full" onclick="setMode('full')"><div class="mode-icon">📋</div><h4>Full Exam</h4><p>331 Qs · 3 hrs</p></div>
+    <div class="mode-card" id="mode-practice" onclick="setMode('practice')"><div class="mode-icon">📝</div><h4>Practice</h4><p>No timer · Instant answers</p></div>
+    <div class="mode-card" id="mode-hard" onclick="setMode('hard')"><div class="mode-icon">🔥</div><h4>Hard Only</h4><p>Hard Qs · 90 min</p></div>
+    <div class="mode-card" id="mode-medium" onclick="setMode('medium')"><div class="mode-icon">📗</div><h4>Medium Only</h4><p>Medium Qs · 60 min</p></div>
+  </div>
+  <div class="reg-card">
+    <h2>Enter Your Details</h2>
+    <p>Your result will be saved automatically after submission.</p>
+    <div class="field-group">
+      <label>Full Name *</label>
+      <input type="text" id="reg-name" placeholder="e.g. Rahul Kumar Sharma" maxlength="80"/>
+      <div class="error-msg" id="err-name">Please enter your full name.</div>
+    </div>
+    <div class="field-group">
+      <label>Designation / Post</label>
+      <input type="text" id="reg-post" placeholder="e.g. Station Controller, Train Operator" maxlength="80"/>
+    </div>
+    <div class="field-group">
+      <label>Department</label>
+      <input type="text" id="reg-dept" placeholder="e.g. Operations, Signalling, P-Way" maxlength="80"/>
+    </div>
+    <div class="field-group">
+      <label>Metro Railway</label>
+      <select id="reg-metro">
+        <option value="">-- Select --</option>
+        <option>Delhi Metro (DMRC)</option>
+        <option>Mumbai Metro</option>
+        <option>Bengaluru Metro (BMRCL)</option>
+        <option>Chennai Metro (CMRL)</option>
+        <option>Hyderabad Metro (HMRL)</option>
+        <option>Kochi Metro (KMRL)</option>
+        <option>Lucknow Metro</option>
+        <option>Nagpur Metro</option>
+        <option>Pune Metro</option>
+        <option>Jaipur Metro</option>
+        <option>Ahmedabad Metro</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <button class="btn-start" onclick="startExam()">BEGIN EXAMINATION →</button>
+  </div>
+  <div class="author-note">Prepared by <strong style="color:var(--gold-light)">Vipul Kumar Arya</strong> · WhatsApp: <a href="https://wa.me/919971529900">9971529900</a> · <a href="#" onclick="showAdmin()">Admin Panel</a></div>
+</div>
+
+<!-- ====== EXAM ====== -->
+<div id="exam" class="page">
+  <div class="exam-header">
+    <div class="header-left">
+      <div class="header-title">MRGR 2020 — MCQ Bank</div>
+      <div class="header-user" id="headerUser"></div>
+    </div>
+    <div class="header-right">
+      <span style="font-size:11px;color:var(--muted)" id="progressInfo">0 answered</span>
+      <div id="timer">03:00:00</div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+  <div class="chapter-nav" id="chapterNav"></div>
+  <div class="exam-body" id="examBody"></div>
+  <div class="exam-footer">
+    <button class="btn btn-secondary" onclick="scrollToTop()">↑ Top</button>
+    <span id="answeredCount" style="font-size:11px;color:var(--muted);">0 / 0 answered</span>
+    <button class="btn btn-submit" onclick="submitExam()">Submit Exam ✓</button>
+  </div>
+</div>
+
+<!-- ====== RESULTS ====== -->
+<div id="results" class="page">
+  <div class="result-inner">
+    <p class="ministry-tag" style="margin-bottom:12px;">Examination Result · MRGR 2020</p>
+    <h1 style="margin-bottom:4px;">Your Result</h1>
+    <div id="resultName" style="font-size:14px;color:var(--gold);margin-bottom:4px;"></div>
+    <div class="gold-rule"></div>
+    <div class="score-ring">
+      <svg viewBox="0 0 180 180" width="170" height="170">
+        <circle cx="90" cy="90" r="80" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12"/>
+        <circle cx="90" cy="90" r="80" fill="none" stroke="url(#gr)" stroke-width="12" stroke-linecap="round" stroke-dasharray="502" id="scoreArc" stroke-dashoffset="502"/>
+        <defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#c9a84c"/><stop offset="100%" stop-color="#e8c97a"/></linearGradient></defs>
+      </svg>
+      <div class="score-ring-num" id="scoreNum">0</div>
+      <div class="score-ring-pct" id="scorePct">0%</div>
+    </div>
+    <div class="result-grid">
+      <div class="result-card"><div class="rc-num green" id="rCorrect">0</div><div class="rc-label">Correct</div></div>
+      <div class="result-card"><div class="rc-num red" id="rWrong">0</div><div class="rc-label">Wrong</div></div>
+      <div class="result-card"><div class="rc-num gold" id="rSkipped">0</div><div class="rc-label">Skipped</div></div>
+      <div class="result-card"><div class="rc-num blue" id="rPct">0%</div><div class="rc-label">Score</div></div>
+    </div>
+    <div class="grade-box"><div class="grade-letter" id="gradeLetter">—</div><div class="grade-label" id="gradeLabel"></div></div>
+    <div class="saving-indicator" id="savingIndicator">
+      <div class="spinner"></div>
+      <span>Saving your result to the database…</span>
+    </div>
+    <div class="result-author">
+      <p>📚 Prepared by <strong>Vipul Kumar Arya</strong><br>For study material contact on WhatsApp: <strong>📱 9971529900</strong></p>
+    </div>
+    <div class="chapter-breakdown">
+      <div class="cb-title">Chapter-wise Performance</div>
+      <div id="cbRows"></div>
+    </div>
+    <button class="btn-retake" onclick="retake()">Take Again ↺</button>
+  </div>
+</div>
+
+<!-- ====== ADMIN PANEL ====== -->
+<div id="admin" class="page">
+  <div class="admin-header">
+    <div>
+      <div class="admin-title">📊 Admin Dashboard</div>
+      <div class="admin-sub">MRGR 2020 MCQ Bank · All Submissions</div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="refresh-btn" onclick="loadAdminData()">⟳ Refresh</button>
+      <button class="refresh-btn" onclick="showPage('registration')">← Back to Quiz</button>
+    </div>
+  </div>
+  <div class="admin-body">
+    <div id="adminLogin" class="admin-login">
+      <h2>Admin Access</h2>
+      <p>Enter the admin password to view all results.</p>
+      <div class="field-group">
+        <label>Password</label>
+        <input type="password" id="adminPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkAdmin()"/>
+        <div class="error-msg" id="adminErr" style="display:block;visibility:hidden;">Incorrect password.</div>
+      </div>
+      <button class="btn-start" style="margin-top:8px;" onclick="checkAdmin()">Access Dashboard</button>
+    </div>
+    <div id="adminContent" style="display:none;">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" id="sTotalAttempts">—</div><div class="stat-label">Total Attempts</div></div>
+        <div class="stat-card"><div class="stat-num" id="sAvgScore">—</div><div class="stat-label">Avg Score %</div></div>
+        <div class="stat-card"><div class="stat-num" id="sHighScore">—</div><div class="stat-label">Highest Score</div></div>
+        <div class="stat-card"><div class="stat-num" id="sPassRate">—</div><div class="stat-label">Pass Rate (≥60%)</div></div>
+      </div>
+      <div class="filter-bar">
+        <input type="text" id="filterName" placeholder="🔍 Search by name…" oninput="filterTable()"/>
+        <select id="filterGrade" onchange="filterTable()">
+          <option value="">All Grades</option>
+          <option value="A+">A+ (≥90%)</option>
+          <option value="A">A (≥75%)</option>
+          <option value="B">B (≥60%)</option>
+          <option value="C">C (≥45%)</option>
+          <option value="F">F (&lt;45%)</option>
+        </select>
+        <select id="filterMode" onchange="filterTable()">
+          <option value="">All Modes</option>
+          <option value="Full Exam">Full Exam</option>
+          <option value="Practice">Practice</option>
+          <option value="Hard Only">Hard Only</option>
+          <option value="Medium Only">Medium Only</option>
+        </select>
+        <button class="refresh-btn" onclick="exportCSV()">⬇ Export CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Designation</th>
+              <th>Department</th>
+              <th>Metro</th>
+              <th>Mode</th>
+              <th>Score</th>
+              <th>%</th>
+              <th>Correct</th>
+              <th>Wrong</th>
+              <th>Skipped</th>
+              <th>Grade</th>
+              <th>Time Taken</th>
+              <th>Date &amp; Time</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+      <div id="adminEmpty" class="admin-empty" style="display:none;"><span>📭</span>No results yet. Share the quiz link to get started.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// 🔧 CONFIGURATION — PASTE YOUR SCRIPT URL BELOW
+// ============================================================
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec";
+const ADMIN_PASSWORD = "vipul@admin"; // Change this to your own password
+// ============================================================
+
+const CHAPTERS=[
+  {id:1,name:"Ch I – Preliminary"},{id:2,name:"Ch II – Authorised Persons"},
+  {id:3,name:"Ch III – Signals"},{id:4,name:"Ch IV – Speed & Trains"},
+  {id:5,name:"Ch V – Platform Doors"},{id:6,name:"Ch VI – Stations"},
+  {id:7,name:"Ch VII – Accidents"},{id:8,name:"Ch VIII – Systems of Working"},
+  {id:9,name:"Ch IX – Single Line"},{id:10,name:"Ch X – Permanent Way"},
+  {id:11,name:"Ch XI – Power Supply"},{id:12,name:"Ch XII – Driverless Trains"},
+  {id:13,name:"Ch XIII – Other"}
+];
+
+const ALL_QUESTIONS=[
+  {ch:1,d:"medium",q:"Under MRGR 2020, the Act referred to in these rules means:",opts:["The Indian Railways Act, 1989","The Metro Railways (Operation and Maintenance) Act, 2002 (60 of 2002)","The Metro Railways (Construction of Works) Act, 1978","The Railways Act, 1989"],ans:1,exp:"Rule 2(ii): 'Act' means the Metro Railways (Operation and Maintenance) Act, 2002 (60 of 2002)."},
+  {ch:1,d:"easy",q:"MRGR 2020 applies to metro railways in India EXCEPT:",opts:["Delhi","Mumbai","The metropolitan city of Calcutta","Bangalore"],ans:2,exp:"Rule 1: These rules apply for regulating operations and maintenance of metro railways in India, except the metropolitan city of Calcutta."},
+  {ch:1,d:"easy",q:"'Headway' is defined as:",opts:["Distance between two stations","Speed limit of a train","Time interval between two successive trains","Gap between platform edge and train"],ans:2,exp:"Rule 2(xlix): Headway means the time interval between two successive trains."},
+  {ch:1,d:"medium",q:"'Normal direction of traffic' in metro railway means:",opts:["Traffic moving on the right side track","Traffic moving on the left side track","Either direction as per schedule","Direction decided daily by OCC"],ans:1,exp:"Rule 2(lxi): Normal direction of traffic means traffic moving on the left side track."},
+  {ch:1,d:"easy",q:"'Train Operator' means:",opts:["Any authorised metro employee","The driver of the train responsible for movement and control","The Roving Attendant managing passengers","The Station Controller overseeing departure"],ans:1,exp:"Rule 2(cxxii): Train Operator means the driver of the train responsible for movement and control of the train."},
+  {ch:1,d:"medium",q:"'Authority to proceed' means:",opts:["Permission from Station Controller to board","Authority given to operator of a train to enter the block section","Permission to depart from depot","Written order to exceed speed limit"],ans:1,exp:"Rule 2(ix): Authority to proceed means the authority given to the operator of a train to enter the block section with his train."},
+  {ch:1,d:"medium",q:"'Calendar day' means:",opts:["Any working day excluding Sundays","The period from midnight of one day to midnight of the subsequent day","A 24-hour period starting at 06:00","Any day on which metro services operate"],ans:1,exp:"Rule 2(xxiii): Calendar day means the period from midnight of one day to midnight of subsequent day."},
+  {ch:1,d:"easy",q:"'Platform Screen Doors' are:",opts:["Manual doors operated by staff","Automated doors synchronized with train doors at platform edge","Doors only for emergency exits","Baggage handling doors"],ans:1,exp:"Rule 2(lxix): PSD means a system of automated doors synchronized with train doors provided at the platform edge to isolate passengers from track."},
+  {ch:1,d:"medium",q:"'Obstruction' in MRGR 2020 includes:",opts:["Only physical objects on track","A train, vehicle or obstacle on or fouling a line or any dangerous condition","Only damaged infrastructure","Only a slow-moving maintenance vehicle"],ans:1,exp:"Rule 2(lxii): Obstruction includes a train, vehicle or obstacle on or fouling a line or any condition which is dangerous to trains."},
+  {ch:1,d:"hard",q:"A 'cab signal' means:",opts:["A physical signal post inside the train cab","Visual indication displayed as speed limit and target distance on the Train Operator's console granting authority to proceed","A radio signal from OCC","An alarm bell inside the cab"],ans:1,exp:"Rule 2(xxii): Cab signal means visual indication displayed as speed limit and target distance on the Train Operator's console granting authority to proceed under automatic mode or coded manual mode."},
+  {ch:1,d:"hard",q:"'Moving block' in metro railway signalling means:",opts:["A physical block placed on track","A block system where blocks are in real time defined by the signalling system as safe zones around each train","A movable signal post","A portable signal device"],ans:1,exp:"Rule 2(lix): Moving block means the block system where blocks are in real time defined by the signalling and train control system as safe zones around each train."},
+  {ch:1,d:"medium",q:"'Operations Control Centre (OCC)' is:",opts:["A maintenance depot","The organisation in overall charge of controlling movement of trains on the main line","A ticketing centre","A passenger information centre"],ans:1,exp:"Rule 2(lxiii): OCC means the organisation in overall charge of controlling the movement of trains on the main line."},
+  {ch:1,d:"hard",q:"'Irrevocable emergency brake' when applied:",opts:["Can be released by Train Operator at any time","Remains applied until train speed comes to zero and cause of application is removed","Only applies partial braking","Can be overridden by OCC"],ans:1,exp:"Rule 2(liv): Irrevocable emergency brake means an emergency brake which, when applied, remains applied until the train speed comes to zero and the cause of application is removed or reset."},
+  {ch:1,d:"medium",q:"'Traffic hours' are defined as:",opts:["Period between 06:00 and 22:00","Period between start of first scheduled train and termination of last scheduled train","Only peak hours","Non-revenue hours"],ans:1,exp:"Rule 2(cxvii): Traffic hours means the period between the time of the start of the first scheduled train and termination of the last scheduled train."},
+  {ch:1,d:"medium",q:"'Shunting' means movement of a coach for the purpose of:",opts:["Revenue service on branch lines","Attaching, detaching or transfer or for any other purpose","Testing at maximum speed","Passenger pick-up at off-platform locations"],ans:1,exp:"Rule 2(lxxxvii): Shunting means the movement of a coach or coaches for attaching, detaching or transfer or for any other purpose."},
+  {ch:2,d:"medium",q:"Every authorised person shall not take any alcoholic drink within how many hours before commencement of duty?",opts:["4 hours","6 hours","8 hours","12 hours"],ans:2,exp:"Rule 11(1): An authorised person shall not take any alcoholic drink, sedative, narcotic or stimulant drug within eight hours before commencement of duty."},
+  {ch:2,d:"medium",q:"The working of trains between stations on metro railway shall be regulated by:",opts:["Local time of the city","Indian Standard Time","Greenwich Mean Time","Railway Board Standard Time"],ans:1,exp:"Rule 14: The working of trains between stations shall be regulated by Indian Standard Time."},
+  {ch:2,d:"medium",q:"Every authorised person shall report any breach of rules to:",opts:["The Commissioner directly","His superior officer and other authority concerned","The Railway Board","The nearest police station"],ans:1,exp:"Rule 6: Every authorised person shall report promptly any breach of rules to his superior officer and other authority concerned."},
+  {ch:2,d:"hard",q:"Under Rule 13, if an authorised person observes a defective signal or dangerous condition, he shall:",opts:["Wait for written instructions","Take immediate steps to prevent accident and promptly report to OCC or nearest Station Controller","Inform passengers directly","Stop the train himself"],ans:1,exp:"Rule 13(2): Any authorised person observing defective signals or dangerous conditions shall take immediate steps to prevent accident and report to OCC or nearest Station Controller."},
+  {ch:2,d:"medium",q:"No authorised person shall be assigned any duty unless:",opts:["He has completed 5 years of service","He has passed the prescribed examination and been issued a certificate of competency","He has approval from Railway Board","He is above a certain grade"],ans:1,exp:"Rule 5(2): No authorised person shall be assigned duty unless he has passed the prescribed examination and been issued a certificate of competency."},
+  {ch:3,d:"easy",q:"Which is NOT a type of signal used for controlling train movements on metro railway?",opts:["Cab signals","Fixed signals","Whistle signals","Virtual signals"],ans:2,exp:"Rule 16(1): The signals used are: cab signals, fixed signals, hand signals, and virtual signals. Whistle signals are not listed."},
+  {ch:3,d:"medium",q:"What does a 'red' aspect on a fixed signal indicate?",opts:["Train may proceed","Route is set and clear","Train must be brought to stop short of signal in RM/ROS/Cut-out mode","Route is locked but not clear"],ans:2,exp:"Rule 17(2)(ii)(a): A red aspect indicates that a train must be brought to stop short of the signal when driven in RM or ROS or cut-out mode."},
+  {ch:3,d:"medium",q:"In case a train stops and does not receive a proceed code, within how many seconds should the Train Operator inform the Traffic Controller?",opts:["30 seconds","45 seconds","60 seconds","90 seconds"],ans:2,exp:"Rule 21(1): In case a train stops and does not receive a proceed code within sixty seconds, the Train Operator shall inform the Traffic Controller."},
+  {ch:3,d:"medium",q:"Main line signalling is normally controlled from:",opts:["The nearest station","The OCC under automatic control with computer-regulated routes","Each depot","The Railway Board"],ans:1,exp:"Rule 20(1)(i): Main line signalling is controlled from OCC normally under automatic control with routes set and intervals regulated by computer control."},
+  {ch:3,d:"hard",q:"A fixed signal displaying no aspect (blank) should be treated as:",opts:["A green signal","A yellow signal","ON (Red) if the train is not running under authority of cab signals","A proceed signal"],ans:2,exp:"Rule 23(1): A fixed signal displaying no aspect, multiple aspects, or flickering shall be treated as ON (Red) if the train is not running under authority of cab signals."},
+  {ch:4,d:"medium",q:"No person shall drive a train unless he:",opts:["Has 2 years experience","Is in possession of a valid certificate of competency and medical fitness","Has approval from Station Controller","Has completed 5 road learning trips"],ans:1,exp:"Rule 25(1): No person shall drive a train unless he is in possession of a valid certificate of competency and medical fitness."},
+  {ch:4,d:"medium",q:"In RM Mode or ROS Mode, maximum speed of trains is automatically regulated to:",opts:["15 km/h","20 km/h","25 km/h","40 km/h"],ans:2,exp:"Rule 27(4): In RM mode or ROS Mode, the maximum speed of trains shall automatically be regulated to twenty-five km/h."},
+  {ch:4,d:"medium",q:"A stationary train on a running line shall show:",opts:["Two white lights at each end","Two red lights at each end","One red and one white light at each end","Two red lights at rear only"],ans:1,exp:"Rule 25(8): A stationary train on a running line shall be secured and shall show two red lights at each end of the train."},
+  {ch:4,d:"hard",q:"Fly shunting of any vehicle is:",opts:["Permitted in depots with Traffic Controller approval","Only permitted during non-traffic hours","Expressly prohibited at any time","Permitted for engineering trains only"],ans:2,exp:"Rule 33(10): Fly shunting of any vehicle is expressly prohibited at any time."},
+  {ch:4,d:"medium",q:"The Train Operator shall undergo a breathalyser test:",opts:["Only at start of duty","At the time of sign-on and sign-off","Only when suspected of intoxication","Once a week randomly"],ans:1,exp:"Rule 29(5): The Train Operator shall undergo breathalyser test at the time of sign-on and sign-off."},
+  {ch:5,d:"medium",q:"Platform Screen Doors open automatically only when the train stops within what limit of its normal stopping position?",opts:["±100mm","±300mm","±500mm or the defined limit","±1000mm"],ans:2,exp:"Rule 35(1)(ii): Signalling enables automatic PSD operation only when train stops within ±500mm or defined limit of its normal stopping position."},
+  {ch:5,d:"medium",q:"If any Platform Screen Door cannot be closed, speed of all trains at that station shall be restricted to:",opts:["10 km/h","15 km/h","20 km/h","25 km/h"],ans:2,exp:"Rule 36(1)(v): If not possible to close any PSD, speed of all trains entering, leaving or passing through shall be restricted to twenty km/h."},
+  {ch:5,d:"medium",q:"A Manual Secondary Door can be opened from the platform side by:",opts:["Any passenger in an emergency","Using a maintenance staff special key","Pressing an emergency push bar","Remote control from OCC"],ans:1,exp:"Rule 35(3): The Manual Secondary Door may be opened from the platform side by using a special maintenance staff key."},
+  {ch:6,d:"medium",q:"Every Station Controller shall open the station at least how many minutes before the first train?",opts:["5 minutes","10 minutes","15 minutes","20 minutes"],ans:1,exp:"Rule 39(i): Every Station Controller shall open the station at least ten minutes before the scheduled time of the first train."},
+  {ch:6,d:"medium",q:"During station emergency evacuation, all AFC barriers shall be set to:",opts:["Lock in entry direction","Open freely in the exit direction","Shut completely","Allow only staff passage"],ans:1,exp:"Rule 46(1)(a): All AFC barriers shall be set to open freely in the exit direction."},
+  {ch:6,d:"medium",q:"In case of fire at the concourse level, trains may be stopped to allow passengers to:",opts:["Both board and alight","Board only, to evacuate passengers more quickly","Alight only","Neither board nor alight"],ans:1,exp:"Rule 46(5): In case fire is at the concourse level, trains may be stopped to allow passengers to board only."},
+  {ch:7,d:"medium",q:"In handling accidents and emergencies, which is the FIRST priority?",opts:["Protect metro railway property","Restore normal services","Save life, prevent further injury and alleviate suffering","Inform public of effect on services"],ans:2,exp:"Rule 49(7)(a): The first priority is to save life, prevent further injury and alleviate suffering."},
+  {ch:7,d:"medium",q:"In case traction power is lost and not restored within how many minutes, passengers shall be detrained?",opts:["5 minutes","10 minutes","15 minutes","20 minutes"],ans:2,exp:"Rule 50(2)(ii): If traction power has not been restored within fifteen minutes, passengers shall be detrained from all trains at stations."},
+  {ch:7,d:"medium",q:"In case of smoke or fire on a train between stations, the Train Operator shall:",opts:["Stop immediately and open all doors","Inform Traffic Controller, drive to next station and detrain passengers","Call for fire service directly","Reverse to previous station"],ans:1,exp:"Rule 52(3): The Train Operator shall inform the Traffic Controller, drive to the next station and detrain passengers."},
+  {ch:7,d:"hard",q:"In the event of an earthquake, the Traffic Controller shall:",opts:["Allow trains to continue at reduced speed","Instruct all trains to stop immediately; after subsiding, each Train Operator proceeds in RM/Cut-out mode at walking speed after examining track","Close all stations immediately","Evacuate all passengers by foot"],ans:1,exp:"Rule 54(3): The Traffic Controller shall instruct all trains to stop immediately; after subsiding, instruct each Train Operator to proceed in RM/Cut-out mode at walking speed after examining track."},
+  {ch:8,d:"medium",q:"The CATC system of working shall be adopted for:",opts:["Movement of trains within depots only","Movement of trains between stations and between depot and main line","Only passenger trains on mainline","Only freight operations"],ans:1,exp:"Rule 56(1): The CATC system shall be adopted for movement of trains between stations and between depot and the main line."},
+  {ch:8,d:"medium",q:"In Automatic Mode, the system shall prevent the train from starting if:",opts:["The ATO system is in standby","Train doors or Platform Screen Doors are not detected closed","Train Operator has not pressed start button","Speed exceeds 5 km/h"],ans:1,exp:"Rule 57(2)(g): The system shall prevent the train from starting if train doors or Platform Screen Doors are not detected closed."},
+  {ch:8,d:"hard",q:"In Coded Manual Mode, the system shall prevent train operation in excess of:",opts:["Maximum speed limit set by Traffic Controller","The target speed or limit of movement authority","25 km/h in all cases","The PSR for that section"],ans:1,exp:"Rule 59(2)(c): In Coded Manual Mode, the system shall prevent train operation in excess of the target speed or limit of movement authority."},
+  {ch:8,d:"medium",q:"In Low Speed Cut-Out Mode, the propulsion system cuts out traction above:",opts:["15 km/h","20 km/h","25 km/h","40 km/h"],ans:2,exp:"Rule 61(1)(i): In Low Speed Cut-Out Mode, the propulsion system cuts out traction above twenty-five km/h."},
+  {ch:9,d:"medium",q:"Single line working is implemented when:",opts:["A train is delayed by more than 10 minutes","There is an obstruction on a portion of one of the running lines between any two stations","Traffic Controller orders speed restriction","A flood occurs"],ans:1,exp:"Rule 63(2): When there is an obstruction on one of the running lines between any two stations, train services may be continued on the adjacent line using single line working."},
+  {ch:9,d:"medium",q:"In single line working, in event of failure of trackside signalling necessitating RM operation, single line working shall be:",opts:["Continued with extra precautions","Suspended immediately","Maintained but at reduced speed","Transferred to other track"],ans:1,exp:"Rule 65: In event of trackside signalling failure necessitating RM operation, single line working shall be suspended immediately."},
+  {ch:10,d:"medium",q:"All authorised persons who go on the tracks shall wear:",opts:["Normal work clothes","Appropriate high visibility clothing, helmet and boots","Only a safety vest","Any bright-coloured clothing"],ans:1,exp:"Rule 66(3): All authorised persons who go on the tracks shall wear appropriate high visibility clothing, helmet and boots."},
+  {ch:10,d:"medium",q:"Engineer's possession on running lines is granted by:",opts:["The Station Controller","The Depot Controller","The Traffic Controller, who has final responsibility","Any senior authorised officer"],ans:2,exp:"Rule 70(1): Engineer's possession on running lines is granted by the Traffic Controller, who has final responsibility."},
+  {ch:10,d:"medium",q:"All works planned to extend beyond non-traffic hours into service hours shall be notified at least:",opts:["24 hours in advance","3 days in advance","A fortnight in advance","1 hour in advance"],ans:2,exp:"Rule 68(1): All works planned to extend beyond non-traffic hours into service hours shall be notified at least a fortnight in advance."},
+  {ch:11,d:"medium",q:"No person shall work closer than how many metres to a live conductor?",opts:["1 metre","2 metres","3 metres","5 metres"],ans:1,exp:"Rule 73(4): No person shall work closer than two metres to a live conductor."},
+  {ch:11,d:"medium",q:"The emergency trip switches shall be used for:",opts:["Switching off all station lighting","Switching off traction power supply in a specified section in case of any emergency","Stopping all escalators","Locking all platform screen doors"],ans:1,exp:"Rule 72(6)(a): Emergency trip switches shall be used for switching off traction power supply in a specified section in case of any emergency."},
+  {ch:11,d:"hard",q:"All electrical equipment shall be regarded as:",opts:["Safe to touch unless visibly live","Being live at all times and dangerous to human life, except when specially made dead, isolated and earthed","Safe only during non-traffic hours","Safe when traction power is off"],ans:1,exp:"Rule 81(1): All electrical equipment shall be regarded as being live at all times and consequently dangerous to human life, except when specially made dead, isolated and earthed."},
+  {ch:12,d:"medium",q:"'Driverless Train Operation (DTO)' means:",opts:["Train operation with no staff on board","A train operation where a Roving Attendant is on-board but normally not in the driving cab","Fully automated operation with no emergency staff","Operation under ATP only without ATO"],ans:1,exp:"Rule 87(1)(a): DTO means a train operation where a Roving Attendant is on-board but normally not in the driving cab."},
+  {ch:12,d:"medium",q:"UTMS wake-up test is performed:",opts:["Once a week","Before each train is offered for passenger service","Only after a breakdown","Once a month"],ans:1,exp:"Rule 101(1): UTMS shall perform wake-up test of each train before being offered for passenger service."},
+  {ch:12,d:"hard",q:"In UTO mode, if CCTV communication between train and OCC fails:",opts:["Train is stopped immediately","Alarm is generated and train may work up to next station in UTO mode, where Roving Attendant shall be called","Train reverts to RM mode automatically","Traffic Controller takes manual remote control"],ans:1,exp:"Rule 100(8): In case of failure of on-board CCTV communication to OCC, alarm shall be generated and train may be allowed up to next station in UTO mode."},
+  {ch:13,d:"medium",q:"MRGR 2020 was notified on which date?",opts:["1st January 2020","15th August 2020","16th December 2020","26th November 2020"],ans:2,exp:"The notification G.S.R. 769(E) was issued on 16th December 2020."},
+  {ch:13,d:"medium",q:"MRGR 2020 supersedes which earlier rules?",opts:["Metro Railways General Rules, 2009","Metro Railways General Rules, 2013","Metro Railways Safety Rules, 2010","Metro Railways Operating Rules, 2015"],ans:1,exp:"MRGR 2020 was issued in supersession of the Metro Railways General Rules, 2013."},
+  {ch:13,d:"hard",q:"Under Rule 117, 'initial stage' of operation means:",opts:["The first year of metro operations","The period in which any section is opened without ATP or when signalling is not available from OCC","The trial run phase only","When Commissioner has not yet certified the line"],ans:1,exp:"Rule 117 Explanation: 'Initial stage' means the period in which any section shall be opened without ATP or when signalling and train control is not available from OCC."}
+];
+
+// ---- State ----
+let selectedMode='full', activeQuestions=[], userAnswers={};
+let timerInterval, timeLeft=180*60, examSubmitted=false, practiceMode=false;
+let startTime, userName='', userPost='', userDept='', userMetro='';
+let allAdminData=[];
+
+function dismissNotice(){
+  document.getElementById('config-notice').style.display='none';
+}
+
+function isConfigured(){
+  return SCRIPT_URL && SCRIPT_URL !== "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec";
+}
+
+// Show notice only if not configured
+window.onload=()=>{
+  if(isConfigured()) document.getElementById('config-notice').style.display='none';
+};
+
+function showPage(id){
+  ['registration','exam','results','admin'].forEach(p=>document.getElementById(p).style.display='none');
+  document.getElementById(id).style.display=(id==='registration'?'flex':(id==='exam'||id==='results'||id==='admin'?'block':'flex'));
+  window.scrollTo(0,0);
+}
+
+function setMode(m){
+  selectedMode=m;
+  document.querySelectorAll('.mode-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('mode-'+m).classList.add('selected');
+}
+
+function startExam(){
+  userName=document.getElementById('reg-name').value.trim();
+  if(!userName){
+    document.getElementById('err-name').style.display='block';
+    return;
+  }
+  document.getElementById('err-name').style.display='none';
+  userPost=document.getElementById('reg-post').value.trim()||'—';
+  userDept=document.getElementById('reg-dept').value.trim()||'—';
+  userMetro=document.getElementById('reg-metro').value||'—';
+
+  if(selectedMode==='hard'){activeQuestions=ALL_QUESTIONS.filter(q=>q.d==='hard');timeLeft=90*60;practiceMode=false;}
+  else if(selectedMode==='medium'){activeQuestions=ALL_QUESTIONS.filter(q=>q.d==='medium');timeLeft=60*60;practiceMode=false;}
+  else if(selectedMode==='practice'){activeQuestions=[...ALL_QUESTIONS];practiceMode=true;}
+  else{activeQuestions=[...ALL_QUESTIONS];timeLeft=180*60;practiceMode=false;}
+
+  userAnswers={};examSubmitted=false;startTime=new Date();
+  document.getElementById('headerUser').textContent=userName+' · '+selectedMode.charAt(0).toUpperCase()+selectedMode.slice(1);
+
+  showPage('exam');
+  renderChapterNav();
+  renderQuestions();
+  if(!practiceMode)startTimer();
+  else document.getElementById('timer').textContent='∞';
+  updateProgress();
+}
+
+function renderChapterNav(){
+  const nav=document.getElementById('chapterNav');nav.innerHTML='';
+  CHAPTERS.forEach(ch=>{
+    if(!activeQuestions.find(q=>q.ch===ch.id))return;
+    const btn=document.createElement('button');btn.className='chapter-tab';btn.id='tab-'+ch.id;
+    btn.textContent=ch.name;btn.onclick=()=>scrollToChapter(ch.id);nav.appendChild(btn);
+  });
+}
+
+function renderQuestions(){
+  const body=document.getElementById('examBody');body.innerHTML='';let gi=0;
+  CHAPTERS.forEach(ch=>{
+    const chQs=activeQuestions.filter(q=>q.ch===ch.id);if(!chQs.length)return;
+    const hdg=document.createElement('div');hdg.className='chapter-heading';hdg.id='chapter-'+ch.id;
+    hdg.textContent=ch.name+' — '+chQs.length+' Questions';body.appendChild(hdg);
+    chQs.forEach(q=>{
+      gi++;const qidx=ALL_QUESTIONS.indexOf(q);
+      const card=document.createElement('div');card.className='q-card';card.id='q-'+gi;
+      card.innerHTML=`<div class="q-num"><span>Q ${gi} / ${activeQuestions.length}</span><span class="q-badge ${q.d}">${q.d.toUpperCase()}</span></div>
+        <div class="q-text">${q.q}</div>
+        <div class="options" id="opts-${gi}">${q.opts.map((o,oi)=>`<div class="option" id="opt-${gi}-${oi}" onclick="selectAnswer(${gi},${oi},${qidx})"><span class="opt-letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}</div>
+        <div class="explanation" id="exp-${gi}"><strong>✓ Explanation:</strong> ${q.exp}</div>`;
+      body.appendChild(card);
+    });
+  });
+}
+
+function selectAnswer(gidx,optIdx,qidx){
+  if(examSubmitted)return;
+  const q=ALL_QUESTIONS[qidx];userAnswers[gidx]=optIdx;
+  document.querySelectorAll(`#opts-${gidx} .option`).forEach((o,i)=>{o.classList.remove('selected');if(i===optIdx)o.classList.add('selected');});
+  if(practiceMode){
+    document.querySelectorAll(`#opts-${gidx} .option`).forEach((o,i)=>{
+      o.classList.add('locked');
+      if(i===q.ans)o.classList.add('correct');
+      else if(i===optIdx&&optIdx!==q.ans)o.classList.add('wrong');
+    });
+    document.getElementById('exp-'+gidx).classList.add('show');
+    const card=document.getElementById('q-'+gidx);
+    card.classList.add(optIdx===q.ans?'answered':'answered-wrong');
+  }
+  updateProgress();updateTabStatus();
+}
+
+function updateProgress(){
+  const t=activeQuestions.length,a=Object.keys(userAnswers).length;
+  document.getElementById('progressBar').style.width=(a/t*100)+'%';
+  document.getElementById('progressInfo').textContent=a+' / '+t+' answered';
+  document.getElementById('answeredCount').textContent=a+' / '+t+' answered';
+}
+
+function updateTabStatus(){
+  CHAPTERS.forEach(ch=>{
+    const tab=document.getElementById('tab-'+ch.id);if(!tab)return;
+    let allDone=true;
+    activeQuestions.forEach((q,i)=>{if(q.ch===ch.id&&userAnswers[i+1]===undefined)allDone=false;});
+    if(allDone)tab.classList.add('done');else tab.classList.remove('done');
+  });
+}
+
+function scrollToChapter(chId){
+  const el=document.getElementById('chapter-'+chId);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.chapter-tab').forEach(t=>t.classList.remove('active'));
+  const tab=document.getElementById('tab-'+chId);if(tab)tab.classList.add('active');
+}
+
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+
+function startTimer(){
+  const update=()=>{
+    const h=Math.floor(timeLeft/3600),m=Math.floor((timeLeft%3600)/60),s=timeLeft%60;
+    document.getElementById('timer').textContent=pad(h)+':'+pad(m)+':'+pad(s);
+    if(timeLeft<=300)document.getElementById('timer').classList.add('danger');
+    if(timeLeft<=0){clearInterval(timerInterval);submitExam(true);}
+    timeLeft--;
+  };
+  update();timerInterval=setInterval(update,1000);
+}
+function pad(n){return String(n).padStart(2,'0');}
+
+function submitExam(auto=false){
+  if(examSubmitted)return;
+  const answered=Object.keys(userAnswers).length,total=activeQuestions.length;
+  if(!auto&&answered<total){if(!confirm(`You have ${total-answered} unanswered question(s). Submit anyway?`))return;}
+  clearInterval(timerInterval);examSubmitted=true;
+
+  let correct=0;
+  activeQuestions.forEach((q,qi)=>{
+    const gi=qi+1,userAns=userAnswers[gi];
+    const opts=document.querySelectorAll(`#opts-${gi} .option`);
+    opts.forEach((o,i)=>{o.classList.add('locked');o.classList.remove('selected');if(i===q.ans)o.classList.add('correct');else if(i===userAns&&userAns!==q.ans)o.classList.add('wrong');});
+    document.getElementById('exp-'+gi).classList.add('show');
+    if(userAns===q.ans){correct++;document.getElementById('q-'+gi).classList.add('answered');}
+    else document.getElementById('q-'+gi).classList.add('answered-wrong');
+  });
+
+  const wrong=Object.keys(userAnswers).filter(gi=>userAnswers[gi]!==activeQuestions[parseInt(gi)-1].ans).length;
+  const skipped=total-answered;
+  const pct=Math.round(correct/total*100);
+  const timeTaken=calcTimeTaken();
+
+  showResults(correct,wrong,skipped,pct,total);
+  saveResult(correct,wrong,skipped,pct,total,timeTaken);
+}
+
+function calcTimeTaken(){
+  const diff=Math.floor((new Date()-startTime)/1000);
+  const h=Math.floor(diff/3600),m=Math.floor((diff%3600)/60),s=diff%60;
+  return pad(h)+'h '+pad(m)+'m '+pad(s)+'s';
+}
+
+function showResults(correct,wrong,skipped,pct,total){
+  showPage('results');
+  document.getElementById('resultName').textContent=userName+(userPost!=='—'?' · '+userPost:'');
+  document.getElementById('rCorrect').textContent=correct;
+  document.getElementById('rWrong').textContent=wrong;
+  document.getElementById('rSkipped').textContent=skipped;
+  document.getElementById('rPct').textContent=pct+'%';
+  document.getElementById('scoreNum').textContent=correct;
+  document.getElementById('scorePct').textContent=pct+'%';
+  setTimeout(()=>{
+    const c=2*Math.PI*80,offset=c-(pct/100)*c;
+    const arc=document.getElementById('scoreArc');
+    arc.style.strokeDashoffset=offset;arc.style.transition='stroke-dashoffset 1.5s ease';
+  },300);
+  let grade,label;
+  if(pct>=90){grade='A+';label='Outstanding — Distinction';}
+  else if(pct>=75){grade='A';label='Excellent — First Class';}
+  else if(pct>=60){grade='B';label='Pass — Satisfactory';}
+  else if(pct>=45){grade='C';label='Below Pass — Needs Improvement';}
+  else{grade='F';label='Fail — Further Study Required';}
+  document.getElementById('gradeLetter').textContent=grade;
+  document.getElementById('gradeLabel').textContent=grade+' · '+label;
+  renderChapterBreakdown();
+}
+
+function renderChapterBreakdown(){
+  const cbRows=document.getElementById('cbRows');cbRows.innerHTML='';
+  CHAPTERS.forEach(ch=>{
+    const chQs=activeQuestions.filter(q=>q.ch===ch.id);if(!chQs.length)return;
+    let chCorr=0;
+    chQs.forEach(q=>{const gi=activeQuestions.indexOf(q)+1;if(userAnswers[gi]===q.ans)chCorr++;});
+    const cp=chQs.length?Math.round(chCorr/chQs.length*100):0;
+    const color=cp>=60?'#2ecc71':(cp>=40?'#c9a84c':'#e74c3c');
+    const row=document.createElement('div');row.className='cb-row';
+    row.innerHTML=`<div class="cb-chap">${ch.name}</div><div class="cb-bar-wrap"><div class="cb-bar" style="width:0%;background:${color}" data-pct="${cp}"></div></div><div class="cb-score" style="color:${color}">${chCorr}/${chQs.length} (${cp}%)</div>`;
+    cbRows.appendChild(row);
+  });
+  setTimeout(()=>{document.querySelectorAll('.cb-bar').forEach(b=>{b.style.width=b.dataset.pct+'%';b.style.transition='width 1.2s ease';});},400);
+}
+
+function saveResult(correct,wrong,skipped,pct,total,timeTaken){
+  const ind=document.getElementById('savingIndicator');
+  if(!isConfigured()){
+    ind.className='saving-indicator error';
+    ind.innerHTML='⚠️ Script URL not configured. Results not saved. See setup instructions.';
+    return;
+  }
+  const modeLabel={full:'Full Exam',practice:'Practice',hard:'Hard Only',medium:'Medium Only'}[selectedMode];
+  const grade=pct>=90?'A+':pct>=75?'A':pct>=60?'B':pct>=45?'C':'F';
+  const payload={
+    name:userName,post:userPost,dept:userDept,metro:userMetro,
+    mode:modeLabel,score:correct+'/'+total,percentage:pct,
+    correct,wrong,skipped,grade,timeTaken,
+    submittedAt:new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})
+  };
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload)})
+    .then(r=>r.json())
+    .then(d=>{
+      if(d.status==='success'){
+        ind.className='saving-indicator';
+        ind.innerHTML='✅ Result saved successfully to the database!';
+      } else throw new Error('Server error');
+    })
+    .catch(()=>{
+      ind.className='saving-indicator error';
+      ind.innerHTML='⚠️ Could not save result. Check your internet connection or Script URL.';
+    });
+}
+
+function retake(){
+  userAnswers={};examSubmitted=false;
+  showPage('registration');
+}
+
+// ---- ADMIN ----
+function showAdmin(){showPage('admin');}
+
+function checkAdmin(){
+  const pass=document.getElementById('adminPass').value;
+  const err=document.getElementById('adminErr');
+  if(pass===ADMIN_PASSWORD){
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminContent').style.display='block';
+    loadAdminData();
+  } else {
+    err.style.visibility='visible';
+    err.textContent='Incorrect password. Try again.';
+  }
+}
+
+function loadAdminData(){
+  if(!isConfigured()){
+    document.getElementById('resultsBody').innerHTML='<tr><td colspan="14" style="text-align:center;color:var(--muted);padding:30px;">Script URL not configured yet.</td></tr>';
+    return;
+  }
+  document.getElementById('resultsBody').innerHTML='<tr><td colspan="14" class="admin-loading">Loading data…</td></tr>';
+  fetch(SCRIPT_URL+'?action=getAll')
+    .then(r=>r.json())
+    .then(data=>{
+      allAdminData=data.rows||[];
+      renderAdminTable(allAdminData);
+      updateAdminStats(allAdminData);
+    })
+    .catch(()=>{
+      document.getElementById('resultsBody').innerHTML='<tr><td colspan="14" style="text-align:center;color:#e74c3c;padding:30px;">Failed to load data. Check your Script URL.</td></tr>';
+    });
+}
+
+function renderAdminTable(rows){
+  const tbody=document.getElementById('resultsBody');
+  const empty=document.getElementById('adminEmpty');
+  if(!rows.length){tbody.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  tbody.innerHTML=rows.map((r,i)=>{
+    const gc=r.grade==='A+'||r.grade==='A'?'badge-a':r.grade==='B'?'badge-b':r.grade==='C'?'badge-c':'badge-f';
+    return `<tr>
+      <td>${rows.length-i}</td>
+      <td><strong>${r.name||'—'}</strong></td>
+      <td>${r.post||'—'}</td>
+      <td>${r.dept||'—'}</td>
+      <td>${r.metro||'—'}</td>
+      <td>${r.mode||'—'}</td>
+      <td>${r.score||'—'}</td>
+      <td><strong>${r.percentage||0}%</strong></td>
+      <td style="color:#2ecc71">${r.correct||0}</td>
+      <td style="color:#e74c3c">${r.wrong||0}</td>
+      <td style="color:var(--gold)">${r.skipped||0}</td>
+      <td><span class="badge ${gc}">${r.grade||'—'}</span></td>
+      <td>${r.timeTaken||'—'}</td>
+      <td style="color:var(--muted);font-size:11px">${r.submittedAt||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function updateAdminStats(rows){
+  document.getElementById('sTotalAttempts').textContent=rows.length;
+  if(!rows.length){['sAvgScore','sHighScore','sPassRate'].forEach(id=>document.getElementById(id).textContent='—');return;}
+  const pcts=rows.map(r=>parseInt(r.percentage)||0);
+  document.getElementById('sAvgScore').textContent=Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length)+'%';
+  document.getElementById('sHighScore').textContent=Math.max(...pcts)+'%';
+  document.getElementById('sPassRate').textContent=Math.round(rows.filter(r=>(parseInt(r.percentage)||0)>=60).length/rows.length*100)+'%';
+}
+
+function filterTable(){
+  const name=document.getElementById('filterName').value.toLowerCase();
+  const grade=document.getElementById('filterGrade').value;
+  const mode=document.getElementById('filterMode').value;
+  const filtered=allAdminData.filter(r=>{
+    const matchName=!name||r.name.toLowerCase().includes(name);
+    const matchGrade=!grade||r.grade===grade;
+    const matchMode=!mode||r.mode===mode;
+    return matchName&&matchGrade&&matchMode;
+  });
+  renderAdminTable(filtered);
+}
+
+function exportCSV(){
+  if(!allAdminData.length){alert('No data to export.');return;}
+  const headers=['#','Name','Post','Department','Metro','Mode','Score','Percentage','Correct','Wrong','Skipped','Grade','Time Taken','Submitted At'];
+  const rows=allAdminData.map((r,i)=>[allAdminData.length-i,r.name,r.post,r.dept,r.metro,r.mode,r.score,r.percentage+'%',r.correct,r.wrong,r.skipped,r.grade,r.timeTaken,r.submittedAt].map(v=>`"${v||''}"`).join(','));
+  const csv=[headers.join(','),...rows].join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='MRGR2020_Results_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+</script>
+</body>
+</html>
