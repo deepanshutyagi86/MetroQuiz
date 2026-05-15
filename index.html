@@ -383,7 +383,7 @@ tr:hover td{background:rgba(201,168,76,0.04);}
 // 🔧 CONFIGURATION — PASTE YOUR SCRIPT URL BELOW
 // ============================================================
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec"; // ← paste your URL here
-const ADMIN_PASSWORD = "vipul@admin";
+const ADMIN_PASSWORD = "mrgr2020admin";
 // ============================================================
 
 const CHAPTERS=[
@@ -468,7 +468,7 @@ function dismissNotice(){
 }
 
 function isConfigured(){
-  return SCRIPT_URL && SCRIPT_URL !== "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec";
+  return SCRIPT_URL && SCRIPT_URL.startsWith("https://script.google.com/macros/s/");
 }
 
 // Show notice only if not configured
