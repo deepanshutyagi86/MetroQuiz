@@ -176,8 +176,8 @@ tr:hover td{background:rgba(201,168,76,0.04);}
     <h2>⚙️ One-Time Setup Required</h2>
     <p>To enable result saving, you need to paste your <strong>Google Apps Script Web App URL</strong> into this file.</p>
     <p>Open this HTML file in a text editor, find the line near the top of the &lt;script&gt; section that says:</p>
-    <p><code>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec";</code></p>
-    <p>Replace <code>https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec</code> with your actual deployed script URL. Follow the setup guide provided separately.</p>
+    <p><code>const SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";</code></p>
+    <p>Replace <code>YOUR_GOOGLE_SCRIPT_URL_HERE</code> with your actual deployed script URL. Follow the setup guide provided separately.</p>
     <p>Once done, the quiz will work fully — results will save to your Google Sheet automatically.</p>
     <button class="btn" onclick="dismissNotice()">I'll set it up — Continue for now</button>
   </div>
@@ -382,8 +382,8 @@ tr:hover td{background:rgba(201,168,76,0.04);}
 // ============================================================
 // 🔧 CONFIGURATION — PASTE YOUR SCRIPT URL BELOW
 // ============================================================
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec";
-const ADMIN_PASSWORD = "vipul@admin"; // Change this to your own password
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1ZtLAyGWUV5KoEyMKWm_G54a35Fz08K_ZiGZIe29yj4oGLpV9takrr2IAAqRdAvd2/exec"; // ← paste your URL here
+const ADMIN_PASSWORD = "vipul@admin";
 // ============================================================
 
 const CHAPTERS=[
@@ -473,7 +473,7 @@ function isConfigured(){
 
 // Show notice only if not configured
 window.onload=()=>{
-  if(isConfigured()) document.getElementById('config-notice').style.display='none';
+  document.getElementById('config-notice').style.display='none';
 };
 
 function showPage(id){
@@ -681,13 +681,11 @@ function saveResult(correct,wrong,skipped,pct,total,timeTaken){
     correct,wrong,skipped,grade,timeTaken,
     submittedAt:new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})
   };
-  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload)})
-    .then(r=>r.json())
-    .then(d=>{
-      if(d.status==='success'){
-        ind.className='saving-indicator';
-        ind.innerHTML='✅ Result saved successfully to the database!';
-      } else throw new Error('Server error');
+  // Use no-cors mode — Google Apps Script requires this from external sites
+  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
+    .then(()=>{
+      ind.className='saving-indicator';
+      ind.innerHTML='✅ Result saved successfully to the database!';
     })
     .catch(()=>{
       ind.className='saving-indicator error';
